@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PC Components</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>PC Components in the Store</h1>
+
+        <!-- Add a form for filtering, sorting, and pagination -->
+        <form action="/filtered-components" method="GET" class="mb-3">
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label for="type">Filter by Type:</label>
+                    <select name="type" id="type" class="form-control">
+                        <option value="">All</option>
+                        <option value="CPU">CPU</option>
+                        <option value="GPU">GPU</option>
+                        <!-- Add other component types as needed -->
+                    </select>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="brand">Filter by Brand:</label>
+                    <select name="brand" id="brand" class="form-control">
+                        <option value="">All</option>
+                        <option value="Intel">Intel</option>
+                        <option value="NVIDIA">NVIDIA</option>
+                        <!-- Add other component brands as needed -->
+                    </select>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="sort">Sort by:</label>
+                    <select name="sort" id="sort" class="form-control">
+                        <option value="name">Name</option>
+                        <option value="price">Price</option>
+                        <!-- Add other sorting options as needed -->
+                    </select>
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="page">Page:</label>
+                    <input type="text" name="page" id="page" value="1" class="form-control">
+                </div>
+                <div class="form-group col-md-1">
+                    <button type="submit" class="btn btn-primary">Apply Filters</button>
+                </div>
+            </div>
+        </form>
+
+        <!-- Display paginated PC components -->
+        <ul class="list-unstyled">
+            {{range .Components}}
+                <li class="card mb-3">
+                    <div class="row no-gutters">
+                        <div class="col-md-4">
+                            <img src="{{.ImageURL}}" alt="{{.Name}}" class="card-img" style="max-width: 200px; max-height: 200px;">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h3 class="card-title">{{.Name}}</h3>
+                                <p class="card-text">Type: {{.Type}}</p>
+                                <p class="card-text">Brand: {{.Brand}}</p>
+                                <p class="card-text">Price: ${{.Price}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            {{end}}
+        </ul>
+    </div>
+</body>
+</html>
